@@ -1,30 +1,24 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import Icon from '@heroicons/react/outline/UserIcon';
 
-export default function UserIcon({ customer, accountUrl, loginUrl }) {
+export default function UserIcon() {
   return (
-    <div className="self-center">
-      <a href={customer ? accountUrl : loginUrl}>
-        <Icon width={25} height={25} />
-      </a>
-    </div>
+    <div className="self-center" />
   );
 }
 
-UserIcon.propTypes = {
-  accountUrl: PropTypes.string,
-  customer: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
-    uuid: PropTypes.string.isRequired
-  }),
-  loginUrl: PropTypes.string.isRequired
-};
+// UserIcon.propTypes = {
+  // accountUrl: PropTypes.string,
+  // customer: PropTypes.shape({
+  //   email: PropTypes.string.isRequired,
+  //   fullName: PropTypes.string.isRequired,
+  //   uuid: PropTypes.string.isRequired
+  // })
+  // loginUrl: PropTypes.string.isRequired
+// };
 
 UserIcon.defaultProps = {
-  accountUrl: null,
-  customer: null
+  // accountUrl: null,
+  // customer: null
 };
 
 export const layout = {
