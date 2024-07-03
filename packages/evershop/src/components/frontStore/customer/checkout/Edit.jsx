@@ -10,8 +10,7 @@ export function Edit({
   customer,
   addContactInfoApi,
   email,
-  setEmail,
-  loginUrl
+  setEmail
 }) {
   const { completeStep } = useCheckoutStepsDispatch();
 
@@ -53,14 +52,6 @@ export function Edit({
   return (
     <div className="">
       <h4 className="mb-4 mt-4">{_('Contact information')}</h4>
-      {!customer && (
-        <div className="mb-4">
-          <span>{_('Already have an account?')}</span>{' '}
-          <a className="text-interactive hover:underline" href={loginUrl}>
-            {_('Login')}
-          </a>
-        </div>
-      )}
       <Form
         id="checkout-contact-info-form"
         action={addContactInfoApi}
@@ -86,7 +77,6 @@ export function Edit({
 Edit.propTypes = {
   addContactInfoApi: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  loginUrl: PropTypes.string.isRequired,
   setEmail: PropTypes.func.isRequired,
   customer: PropTypes.shape({
     email: PropTypes.string.isRequired
