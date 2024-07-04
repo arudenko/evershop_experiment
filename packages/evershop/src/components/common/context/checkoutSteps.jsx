@@ -26,6 +26,7 @@ export function CheckoutSteps({ children, value }) {
    * @param {Object} step { id, title, isCompleted, sortOrder, editable }}
    */
   const addStep = (step) => {
+    // console.log('addStep', step)
     setSteps((previous) => previous.concat([step]));
   };
 

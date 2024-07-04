@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Button from '@components/common/form/Button';
-import { AddressSummary } from '@components/common/customer/address/AddressSummary';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
 
 export default function CustomerInfo({
@@ -10,7 +9,6 @@ export default function CustomerInfo({
     customerFullName,
     customerEmail,
     paymentMethodName,
-    shippingAddress,
     billingAddress
   }
 }) {
@@ -40,7 +38,7 @@ export default function CustomerInfo({
           </span>
           <div>
             {_('Thank you ${name}!', {
-              name: customerFullName || billingAddress?.fullName
+              name: customerFullName || billingAddress?.fullName || customerEmail
             })}
           </div>
         </div>
@@ -58,14 +56,6 @@ export default function CustomerInfo({
               </div>
               <div className="text-textSubdued">{customerEmail}</div>
             </div>
-            <div>
-              <div className="mb-3">
-                <h3>{_('Shipping Address')}</h3>
-              </div>
-              <div className="text-textSubdued">
-                <AddressSummary address={shippingAddress} />
-              </div>
-            </div>
           </div>
           <div className="grid grid-cols-1 gap-12">
             <div className="mb-8">
@@ -73,14 +63,6 @@ export default function CustomerInfo({
                 <h3>{_('Payment Method')}</h3>
               </div>
               <div className="text-textSubdued">{paymentMethodName}</div>
-            </div>
-            <div>
-              <div className="mb-3">
-                <h3>{_('Billing Address')}</h3>
-              </div>
-              <div className="text-textSubdued">
-                <AddressSummary address={billingAddress} />
-              </div>
             </div>
           </div>
         </div>
@@ -143,38 +125,7 @@ export const query = `
       customerFullName
       customerEmail
       paymentMethodName
-      shippingAddress {
-        fullName
-        postcode
-        telephone
-        country {
-          name
-          code
-        }
-        province {
-          name
-          code
-        }
-        city
-        address1
-        address2
-      }
-      billingAddress {
-        fullName
-        postcode
-        telephone
-        country {
-          name
-          code
-        }
-        province {
-          name
-          code
-        }
-        city
-        address1
-        address2
-      }
+      
     }
   }
 `;

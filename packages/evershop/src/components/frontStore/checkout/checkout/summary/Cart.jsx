@@ -59,7 +59,7 @@ CartSummary.propTypes = {
   taxAmount: PropTypes.shape({
     text: PropTypes.string.isRequired
   }),
-  totalQty: PropTypes.string,
+  totalQty: PropTypes.number,
   displayCheckoutPriceIncludeTax: PropTypes.bool
 };
 

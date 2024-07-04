@@ -52,35 +52,17 @@ let validationServices = [
     id: 'shippingAddress',
     /**
      *
-     * @param {Cart} cart
-     * @param {*} validationErrors
      * @returns
      */
-    func: (cart, validationErrors) => {
-      if (!cart.getData('shipping_address_id')) {
-        validationErrors.push('Please provide a shipping address');
-        return false;
-      } else {
-        return true;
-      }
-    }
+    func: () => true
   },
   {
     id: 'shippingMethod',
     /**
      *
-     * @param {Cart} cart
-     * @param {*} validationErrors
      * @returns
      */
-    func: (cart, validationErrors) => {
-      if (!cart.getData('shipping_method')) {
-        validationErrors.push('Please provide a shipping method');
-        return false;
-      } else {
-        return true;
-      }
-    }
+    func: () => true
   }
 ];
 
@@ -104,25 +86,25 @@ exports.createOrder = async function createOrder(cart) {
         throw new Error(validationErrors);
       }
     }
-
-    // Save the shipping address
-    const cartShippingAddress = await select()
-      .from('cart_address')
-      .where('cart_address_id', '=', cart.getData('shipping_address_id'))
-      .load(connection);
-    delete cartShippingAddress.uuid;
-    const shipAddr = await insert('order_address')
-      .given(cartShippingAddress)
-      .execute(connection);
-    // Save the billing address
-    const cartBillingAddress = await select()
-      .from('cart_address')
-      .where('cart_address_id', '=', cart.getData('billing_address_id'))
-      .load(connection);
-    delete cartBillingAddress.uuid;
-    const billAddr = await insert('order_address')
-      .given(cartBillingAddress)
-      .execute(connection);
+    //
+    // // Save the shipping address
+    // const cartShippingAddress = await select()
+    //   .from('cart_address')
+    //   .where('cart_address_id', '=', cart.getData('shipping_address_id'))
+    //   .load(connection);
+    // delete cartShippingAddress.uuid;
+    // const shipAddr = await insert('order_address')
+    //   .given(cartShippingAddress)
+    //   .execute(connection);
+    // // Save the billing address
+    // const cartBillingAddress = await select()
+    //   .from('cart_address')
+    //   .where('cart_address_id', '=', cart.getData('billing_address_id'))
+    //   .load(connection);
+    // delete cartBillingAddress.uuid;
+    // const billAddr = await insert('order_address')
+    //   .given(cartBillingAddress)
+    //   .execute(connection);
     // Save order to DB
     const previous = await select('order_id')
       .from('order')
@@ -153,8 +135,8 @@ exports.createOrder = async function createOrder(cart) {
         order_number:
           10000 + parseInt(previous[0] ? previous[0].order_id : 0, 10) + 1,
         // FIXME: Must be structured
-        shipping_address_id: shipAddr.insertId,
-        billing_address_id: billAddr.insertId,
+        // shipping_address_id: shipAddr.insertId,
+        // billing_address_id: billAddr.insertId,
         payment_status: defaultPaymentStatus,
         shipment_status: defaultShipmentStatus
       })

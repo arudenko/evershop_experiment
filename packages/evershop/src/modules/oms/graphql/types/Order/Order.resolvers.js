@@ -27,20 +27,6 @@ module.exports = {
         .execute(pool);
       return items.map((item) => camelCase(item));
     },
-    shippingAddress: async ({ shippingAddressId }, _, { pool }) => {
-      const address = await select()
-        .from('order_address')
-        .where('order_address_id', '=', shippingAddressId)
-        .load(pool);
-      return address ? camelCase(address) : null;
-    },
-    billingAddress: async ({ billingAddressId }, _, { pool }) => {
-      const address = await select()
-        .from('order_address')
-        .where('order_address_id', '=', billingAddressId)
-        .load(pool);
-      return address ? camelCase(address) : null;
-    },
     activities: async ({ orderId }, _, { pool }) => {
       const query = select().from('order_activity');
       query.where('order_activity_order_id', '=', orderId);

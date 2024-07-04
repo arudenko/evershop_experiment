@@ -124,7 +124,16 @@ Field.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   onChange: PropTypes.func,
-  validationRules: PropTypes.arrayOf(PropTypes.string),
+  // Fixed a bug to accept an array of strings or objects instead of just a string
+  validationRules: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        rule: PropTypes.string.isRequired,
+        message: PropTypes.string
+      })
+    ])
+  ),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 

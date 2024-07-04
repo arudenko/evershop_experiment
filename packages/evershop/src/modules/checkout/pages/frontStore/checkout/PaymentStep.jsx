@@ -37,24 +37,7 @@ export default function PaymentStep({ cart }) {
 
 PaymentStep.propTypes = {
   cart: PropTypes.shape({
-    addBillingAddressApi: PropTypes.string.isRequired,
-    addPaymentMethodApi: PropTypes.string.isRequired,
-    billingAddress: PropTypes.shape({
-      address1: PropTypes.string,
-      address2: PropTypes.string,
-      city: PropTypes.string,
-      country: PropTypes.shape({
-        code: PropTypes.string,
-        name: PropTypes.string
-      }),
-      fullName: PropTypes.string,
-      postcode: PropTypes.string,
-      province: PropTypes.shape({
-        code: PropTypes.string,
-        name: PropTypes.string
-      }),
-      telephone: PropTypes.string
-    })
+    addPaymentMethodApi: PropTypes.string.isRequired
   }).isRequired
 };
 
@@ -66,24 +49,6 @@ export const layout = {
 export const query = `
   query Query {
     cart {
-      billingAddress {
-        id: cartAddressId
-        fullName
-        postcode
-        telephone
-        country {
-          code
-          name
-        }
-        province {
-          code
-          name
-        }
-        city
-        address1
-        address2
-      }
-      addBillingAddressApi: addAddressApi
       addPaymentMethodApi
     }
   }

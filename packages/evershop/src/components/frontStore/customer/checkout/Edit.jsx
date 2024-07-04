@@ -59,7 +59,7 @@ export function Edit({
         isJSON
         onSuccess={onSuccess}
         submitBtn
-        btnText={_('Continue to shipping')}
+        btnText={_('Continue to payment')}
       >
         <Field
           type="text"

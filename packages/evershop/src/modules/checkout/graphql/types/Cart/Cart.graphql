@@ -21,10 +21,8 @@ interface ShoppingCart {
   grandTotal: Price!
   shippingMethod: String
   shippingMethodName: String
-  shippingAddress: Address
   paymentMethod: String
   paymentMethodName: String
-  billingAddress: Address
   shippingNote: String
 }
 
@@ -52,35 +50,6 @@ interface ShoppingCartItem {
   productUrl: String!
 }
 
-"""
-Address interface
-"""
-interface Address {
-  fullName: String
-  postcode: String
-  telephone: String
-  country: Country
-  province: Province
-  city: String
-  address1: String
-  address2: String
-}
-
-"""
-Represent a Cart Address
-"""
-type CartAddress implements Address {
-  cartAddressId: Int!
-  uuid: String!
-  fullName: String
-  postcode: String
-  telephone: String
-  country: Country
-  province: Province
-  city: String
-  address1: String
-  address2: String
-}
 
 """
 Represent a Cart Item
@@ -119,8 +88,6 @@ type Cart implements ShoppingCart {
   cartId: ID!
   uuid: String!
   items: [CartItem]
-  shippingAddress: CartAddress
-  billingAddress: CartAddress
   currency: String!
   customerId: Int
   customerGroupId: Int
@@ -146,9 +113,6 @@ type Cart implements ShoppingCart {
   shippingNote: String
   addItemApi: String!
   addPaymentMethodApi: String!
-  addShippingMethodApi: String!
-  addContactInfoApi: String!
-  addAddressApi: String!
 }
 
 extend type Query {

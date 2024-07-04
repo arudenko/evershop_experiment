@@ -11,7 +11,7 @@
       "enum": ["shipping", "billing"]
     }
   },
-  "required": ["address", "type"],
+  "required": [],
   "additionalProperties": true,
   "errorMessage": {
     "properties": {

@@ -6,6 +6,8 @@
 - [ ] Reserve quantity while showing the QR code 
 
 
+ShipmentStep
+
 # DONE
 - [X] Change price form USD to SGD
   - Need to change config file.

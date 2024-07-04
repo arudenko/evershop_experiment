@@ -1,18 +1,4 @@
-"""
-Represents an Order Address.
-"""
-type OrderAddress implements Address {
-  orderAddressId: Int!
-  uuid: String!
-  fullName: String
-  postcode: String
-  telephone: String
-  country: Country
-  province: Province
-  city: String
-  address1: String
-  address2: String
-}
+
 
 """
 Represents an Order Item.
@@ -50,8 +36,6 @@ type Order implements ShoppingCart {
   uuid: String!
   orderNumber: String!
   items: [OrderItem]
-  shippingAddress: OrderAddress
-  billingAddress: OrderAddress
   currency: String!
   customerId: Int
   customerGroupId: Int
