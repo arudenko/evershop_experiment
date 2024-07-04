@@ -1,20 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Discount } from '@components/frontStore/checkout/success/summary/order/Discount';
-import { Shipping } from '@components/frontStore/checkout/success/summary/order/Shipping';
 import { Subtotal } from '@components/frontStore/checkout/success/summary/order/Subtotal';
-import { Tax } from '@components/frontStore/checkout/success/summary/order/Tax';
 import { Total } from '@components/frontStore/checkout/success/summary/order/Total';
 
 function OrderSummary({
   items,
   subTotal,
   subTotalInclTax,
-  shippingMethodName,
-  shippingFeeInclTax,
-  taxAmount,
-  discountAmount,
-  coupon,
   grandTotal,
   displayCheckoutPriceIncludeTax
 }) {
@@ -26,22 +18,15 @@ function OrderSummary({
           displayCheckoutPriceIncludeTax ? subTotalInclTax.text : subTotal.text
         }
       />
-      <Shipping method={shippingMethodName} cost={shippingFeeInclTax.text} />
-      {!displayCheckoutPriceIncludeTax && (
-        <Tax taxClass="" amount={taxAmount.text} />
-      )}
-      <Discount code={coupon} discount={discountAmount.text} />
       <Total
         total={grandTotal.text}
         displayCheckoutPriceIncludeTax={displayCheckoutPriceIncludeTax}
-        taxAmount={taxAmount.text}
       />
     </div>
   );
 }
 
 OrderSummary.propTypes = {
-  coupon: PropTypes.string,
   discountAmount: PropTypes.shape({
     text: PropTypes.string.isRequired
   }),
@@ -61,7 +46,6 @@ OrderSummary.propTypes = {
   shippingFeeInclTax: PropTypes.shape({
     text: PropTypes.string.isRequired
   }),
-  shippingMethodName: PropTypes.string,
   subTotal: PropTypes.shape({
     text: PropTypes.string
   }),
@@ -75,7 +59,6 @@ OrderSummary.propTypes = {
 };
 
 OrderSummary.defaultProps = {
-  coupon: '',
   discountAmount: {
     text: '0.00'
   },
@@ -85,7 +68,6 @@ OrderSummary.defaultProps = {
   shippingFeeInclTax: {
     text: '0.00'
   },
-  shippingMethodName: 'Free Shipping',
   subTotal: {
     text: '0.00'
   },

@@ -28,23 +28,6 @@ const cartQuery = `
         address1
         address2
       }
-      shippingAddress {
-        cartAddressId
-        fullName
-        postcode
-        telephone
-        country {
-          name
-          code
-        }
-        province {
-          name
-          code
-        }
-        city
-        address1
-        address2
-      }
       customerEmail
     }
   }

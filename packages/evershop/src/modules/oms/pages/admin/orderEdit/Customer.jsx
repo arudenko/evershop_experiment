@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Card } from '@components/admin/cms/Card';
-import { AddressSummary } from '@components/common/customer/address/AddressSummary';
 
 export default function Customer({
   order: {
-    shippingAddress,
-    billingAddress,
     customerFullName,
     customerEmail,
     customerUrl
@@ -31,15 +28,6 @@ export default function Customer({
             {customerEmail}
           </a>
         </div>
-        <div>
-          <span>{shippingAddress.telephone}</span>
-        </div>
-      </Card.Session>
-      <Card.Session title="Shipping Address">
-        <AddressSummary address={shippingAddress} />
-      </Card.Session>
-      <Card.Session title="Billing address">
-        <AddressSummary address={billingAddress} />
       </Card.Session>
     </Card>
   );
@@ -47,39 +35,9 @@ export default function Customer({
 
 Customer.propTypes = {
   order: PropTypes.shape({
-    customerFullName: PropTypes.string.isRequired,
+    customerFullName: PropTypes.string,
     customerEmail: PropTypes.string.isRequired,
-    customerUrl: PropTypes.string,
-    shippingAddress: PropTypes.shape({
-      fullName: PropTypes.string.isRequired,
-      address1: PropTypes.string.isRequired,
-      city: PropTypes.string.isRequired,
-      postcode: PropTypes.string.isRequired,
-      telephone: PropTypes.string.isRequired,
-      province: PropTypes.shape({
-        code: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
-      }).isRequired,
-      country: PropTypes.shape({
-        code: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
-      }).isRequired
-    }).isRequired,
-    billingAddress: PropTypes.shape({
-      fullName: PropTypes.string.isRequired,
-      address1: PropTypes.string.isRequired,
-      city: PropTypes.string.isRequired,
-      postcode: PropTypes.string.isRequired,
-      telephone: PropTypes.string.isRequired,
-      province: PropTypes.shape({
-        code: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
-      }).isRequired,
-      country: PropTypes.shape({
-        code: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
-      }).isRequired
-    }).isRequired
+    customerUrl: PropTypes.string
   }).isRequired
 };
 
@@ -94,38 +52,6 @@ export const query = `
       customerFullName
       customerEmail
       customerUrl
-      shippingAddress {
-        fullName
-        city
-        address1
-        address2
-        postcode
-        telephone
-        province {
-          code
-          name
-        }
-        country {
-          code
-          name
-        }
-      }
-      billingAddress {
-        fullName
-        city
-        address1
-        address2
-        postcode
-        telephone
-        province {
-          code
-          name
-        }
-        country {
-          code
-          name
-        }
-      }
     }
   }
 `;

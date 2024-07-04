@@ -100,6 +100,9 @@ export function Form(props) {
 
   const submit = async (e) => {
     e.preventDefault();
+    if (action === "") {
+      return true;
+    }
     setState('submitting');
     try {
       PubSub.publishSync(FORM_SUBMIT, { props });

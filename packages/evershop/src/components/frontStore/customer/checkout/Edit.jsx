@@ -48,7 +48,6 @@ export function Edit({
     }
     setContactIfLoggedIn();
   }, []);
-
   return (
     <div className="">
       <h4 className="mb-4 mt-4">{_('Contact information')}</h4>

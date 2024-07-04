@@ -112,6 +112,7 @@ type Cart implements ShoppingCart {
   paymentMethodName: String
   shippingNote: String
   addItemApi: String!
+  addContactInfoApi: String!
   addPaymentMethodApi: String!
 }
 

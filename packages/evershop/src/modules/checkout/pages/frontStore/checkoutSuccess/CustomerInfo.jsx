@@ -8,8 +8,7 @@ export default function CustomerInfo({
     orderNumber,
     customerFullName,
     customerEmail,
-    paymentMethodName,
-    billingAddress
+    paymentMethodName
   }
 }) {
   return (
@@ -38,7 +37,7 @@ export default function CustomerInfo({
           </span>
           <div>
             {_('Thank you ${name}!', {
-              name: customerFullName || billingAddress?.fullName || customerEmail
+              name: customerFullName || customerEmail
             })}
           </div>
         </div>
@@ -52,7 +51,7 @@ export default function CustomerInfo({
                 <h3>{_('Contact information')}</h3>
               </div>
               <div className="text-textSubdued">
-                {customerFullName || billingAddress?.fullName}
+                {customerFullName}
               </div>
               <div className="text-textSubdued">{customerEmail}</div>
             </div>
@@ -77,39 +76,7 @@ CustomerInfo.propTypes = {
     orderNumber: PropTypes.string.isRequired,
     customerFullName: PropTypes.string,
     customerEmail: PropTypes.string.isRequired,
-    paymentMethodName: PropTypes.string.isRequired,
-    shippingAddress: PropTypes.shape({
-      fullName: PropTypes.string,
-      postcode: PropTypes.string,
-      telephone: PropTypes.string,
-      country: PropTypes.shape({
-        name: PropTypes.string,
-        code: PropTypes.string
-      }),
-      province: PropTypes.shape({
-        name: PropTypes.string,
-        code: PropTypes.string
-      }),
-      city: PropTypes.string,
-      address1: PropTypes.string,
-      address2: PropTypes.string
-    }),
-    billingAddress: PropTypes.shape({
-      fullName: PropTypes.string,
-      postcode: PropTypes.string,
-      telephone: PropTypes.string,
-      country: PropTypes.shape({
-        name: PropTypes.string,
-        code: PropTypes.string
-      }),
-      province: PropTypes.shape({
-        name: PropTypes.string,
-        code: PropTypes.string
-      }),
-      city: PropTypes.string,
-      address1: PropTypes.string,
-      address2: PropTypes.string
-    })
+    paymentMethodName: PropTypes.string.isRequired
   }).isRequired
 };
 

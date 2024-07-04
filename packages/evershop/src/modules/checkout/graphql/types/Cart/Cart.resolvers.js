@@ -23,6 +23,8 @@ module.exports = {
     },
     addItemApi: (cart) => buildUrl('addCartItem', { cart_id: cart.uuid }),
     addPaymentMethodApi: (cart) =>
-      buildUrl('addCartPaymentMethod', { cart_id: cart.uuid })
+      buildUrl('addCartPaymentMethod', { cart_id: cart.uuid }),
+    addContactInfoApi: (cart) =>
+      buildUrl('addCartContactInfo', { cart_id: cart.uuid })
   }
 };
