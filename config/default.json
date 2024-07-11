@@ -1,7 +1,5 @@
 {
   "shop": {
     "currency": "SGD"
-  },
-  "media_path": "/Users/alex/work/evershop/media",
-  "seller_email_attribute_id": 3
+  }
 }

@@ -26,7 +26,8 @@ module.exports = {
           .from('product_attribute_value_index')
           .where('product_id', '=', itemId)
           .execute(pool);
-        return attributes.find((attribute) => attribute.attribute_id === getConfig("seller_email_attribute_id", -1)).option_text;
+        const email_attribute_id = parseInt(getConfig("seller_email_attribute_id", process.env.SELLER_EMAIL_ATTRIBUTE_ID), 10);
+        return attributes.find((attribute) => attribute.attribute_id === email_attribute_id).option_text;
       }
 
       const items = await select()
