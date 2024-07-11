@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-const { select } = require('@evershop/postgres-query-builder');
+const { select, insert } = require('@evershop/postgres-query-builder');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { buildUrl } = require('@evershop/evershop/src/lib/router/buildUrl');
 const {
@@ -13,7 +13,7 @@ const { createOrder } = require('../../services/orderCreator');
 // eslint-disable-next-line no-unused-vars
 module.exports = async (request, response, delegate, next) => {
   try {
-    const { cart_id } = request.body;
+    const { cart_id, payment_reference } = request.body;
     // Verify cart
     const cart = await getCartByUUID(cart_id);
     if (!cart) {
@@ -59,6 +59,18 @@ module.exports = async (request, response, delegate, next) => {
       .from('order_address')
       .where('order_address_id', '=', order.billing_address_id)
       .load(pool);
+
+    // Add transaction data to database
+    await insert('payment_transaction')
+      .given({
+        payment_transaction_order_id: order.order_id,
+        amount: order.grand_total,
+        currency: order.currency,
+        payment_action: 'capture',
+        transaction_type: 'offline',
+        payment_reference
+      })
+      .execute(pool);
 
     response.status(OK);
     response.$body = {

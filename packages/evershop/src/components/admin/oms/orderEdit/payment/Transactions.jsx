@@ -2,20 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export function Transactions({ transactions }) {
-  let paidAmount = '';
+  let reference = '';
   transactions.forEach((transaction) => {
     if (transaction.paymentAction.toUpperCase() === 'CAPTURE') {
-      paidAmount = transaction.amount.text; // TODO: How about partial captures?
+      reference = transaction.paymentReference;
     }
   });
 
   return (
     <div className="flex justify-between">
       <div className="self-center">
-        <span>Paid by customer</span>
+        <span>Payment reference</span>
       </div>
       <div className="self-center">
-        <span>{paidAmount || 0}</span>
+        <span>{reference}</span>
       </div>
     </div>
   );

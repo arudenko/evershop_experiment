@@ -20,10 +20,10 @@ const QUERY = `
 `;
 
 export function StepContent({
-  cart: { addPaymentMethodApi }
-}) {
+                              cart: { addPaymentMethodApi }
+                            }) {
   const { completeStep } = useCheckoutStepsDispatch();
-  const { cartId, paymentMethods, getPaymentMethods } = useCheckout();
+  const { cartId, paymentMethods, getPaymentMethods, paymentReference } = useCheckout();
   const [loading, setLoading] = useState(false);
 
   const onSuccess = async (response) => {
@@ -34,8 +34,8 @@ export function StepContent({
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          method_code: "cod",
-          method_name: "Cash On Delivery"
+          method_code: 'cod',
+          method_name: 'QR Code Payment'
         })
       });
       const data = await result.json();
@@ -125,15 +125,11 @@ export function StepContent({
           <Button
             onAction={() => {
               setLoading(true);
-              // document
-              //   .getElementById('checkoutPaymentForm')
-              //   .dispatchEvent(
-              //     new Event('submit', { cancelable: true, bubbles: true })
-              //   );
               onSuccess({ error: null });
             }}
             title={_('Place Order')}
             isLoading={loading}
+            disabled={paymentReference === ''}
           />
         </div>
       </Form>

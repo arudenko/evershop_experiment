@@ -11,6 +11,7 @@ type PaymentTransaction {
   paymentAction: String!
   additionalInformation: String!
   createdAt: String!
+  paymentReference: String
 }
 
 extend type Order {

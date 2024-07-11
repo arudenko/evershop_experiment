@@ -3,9 +3,12 @@
   "properties": {
     "cart_id": {
       "type": "string"
+    },
+    "payment_reference": {
+      "type": "string"
     }
   },
-  "required": ["cart_id"],
+  "required": ["cart_id", "payment_reference"],
   "additionalProperties": true,
   "errorMessage": {
     "properties": {

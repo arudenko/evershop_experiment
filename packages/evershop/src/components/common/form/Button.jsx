@@ -10,7 +10,8 @@ function Button({
   onAction,
   url = undefined,
   isLoading = false,
-  type = 'button'
+  type = 'button',
+  disabled = false
 }) {
   const className = ['button', variant];
   if (outline === true) className.push('outline');
@@ -29,6 +30,7 @@ function Button({
           onActionFunc(e);
         }}
         className={className.join(' ')}
+        disabled={disabled}
       >
         <span>{title}</span>
         {isLoading === true && (
@@ -81,7 +83,8 @@ Button.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   url: PropTypes.string,
   variant: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  disabled: PropTypes.bool
 };
 
 Button.defaultProps = {
@@ -90,7 +93,8 @@ Button.defaultProps = {
   outline: false,
   url: undefined,
   variant: 'primary',
-  type: 'button'
+  type: 'button',
+  disabled: false
 };
 
 export default Button;

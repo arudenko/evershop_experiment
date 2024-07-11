@@ -88,23 +88,7 @@ exports.createOrder = async function createOrder(cart) {
     }
     //
     // // Save the shipping address
-    // const cartShippingAddress = await select()
-    //   .from('cart_address')
-    //   .where('cart_address_id', '=', cart.getData('shipping_address_id'))
-    //   .load(connection);
-    // delete cartShippingAddress.uuid;
-    // const shipAddr = await insert('order_address')
-    //   .given(cartShippingAddress)
-    //   .execute(connection);
-    // // Save the billing address
-    // const cartBillingAddress = await select()
-    //   .from('cart_address')
-    //   .where('cart_address_id', '=', cart.getData('billing_address_id'))
-    //   .load(connection);
-    // delete cartBillingAddress.uuid;
-    // const billAddr = await insert('order_address')
-    //   .given(cartBillingAddress)
-    //   .execute(connection);
+
     // Save order to DB
     const previous = await select('order_id')
       .from('order')

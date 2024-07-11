@@ -8,12 +8,11 @@ import { toast } from 'react-toastify';
 export default function MarkDeliveredButton({
   order: {
     orderId,
-    shipmentStatus: { code },
-    shipment
+    shipmentStatus: { code }
   },
   markDeliveredApi
 }) {
-  if (!shipment || code === 'delivered') {
+  if (code === 'delivered') {
     return null;
   } else {
     return (
@@ -49,9 +48,6 @@ MarkDeliveredButton.propTypes = {
     orderId: PropTypes.string,
     shipmentStatus: PropTypes.shape({
       code: PropTypes.string
-    }).isRequired,
-    shipment: PropTypes.shape({
-      shipmentId: PropTypes.number
     }).isRequired
   }).isRequired,
   markDeliveredApi: PropTypes.string.isRequired
