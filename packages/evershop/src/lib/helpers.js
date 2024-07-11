@@ -8,7 +8,7 @@ exports.CONSTANTS = Object.freeze({
   LIBPATH: path.resolve(__dirname),
   MOLDULESPATH: path.resolve(__dirname, '..', 'modules'),
   PUBLICPATH: path.resolve(rootPath, 'public'),
-  MEDIAPATH: path.resolve(rootPath, 'media'),
+  MEDIAPATH: getConfig('media_path', path.resolve(rootPath, 'media')),
   NODEMODULEPATH: path.resolve(rootPath, 'node_modules'),
   THEMEPATH: path.resolve(rootPath, 'themes'),
   CACHEPATH: path.resolve(rootPath, '.evershop'),

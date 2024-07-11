@@ -21,11 +21,23 @@ module.exports = {
   },
   Order: {
     items: async ({ orderId }, _, { pool }) => {
+      const getSenderEmail = async (itemId) => {
+        const attributes =  await select()
+          .from('product_attribute_value_index')
+          .where('product_id', '=', itemId)
+          .execute(pool);
+        return attributes.find((attribute) => attribute.attribute_id === getConfig("seller_email_attribute_id", -1)).option_text;
+      }
+
       const items = await select()
         .from('order_item')
         .where('order_item_order_id', '=', orderId)
         .execute(pool);
-      return items.map((item) => camelCase(item));
+      return items.map(async (item) => {
+        const processedItem = camelCase(item)
+        processedItem.sellerEmail = await getSenderEmail(item.product_id);
+        return processedItem;
+      });
     },
     activities: async ({ orderId }, _, { pool }) => {
       const query = select().from('order_activity');

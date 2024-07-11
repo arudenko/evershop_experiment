@@ -26,6 +26,7 @@ type OrderItem {
   variantOptions: String
   productCustomOptions: String
   productUrl: String
+  sellerEmail: String
 }
 
 """

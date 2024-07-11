@@ -1,11 +1,11 @@
 # TODO
-- [ ] Configure external folder for images
-- [ ] show seller email in the order submission screen (need to use order properties)
 
 ShipmentStep
 
 # DONE
 
+- [X] Show seller email in the order submission screen (need to use order properties)
+- [X] Configure external folder for images
 - [X] Include reference as text and/or image
   - [X] Add DB column
   - [X] Display reference in Admin

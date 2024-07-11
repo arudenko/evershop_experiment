@@ -28,8 +28,9 @@ function Items({ items, displayCheckoutPriceIncludeTax }) {
               <td>
                 <div className="product-column">
                   <div>
-                    <span className="font-semibold">{item.productName}</span>
+                    <span className="font-semibold">{item.productName} </span>
                   </div>
+                  Please contact <a href= {`mailto:${  item.sellerEmail}`}>{item.sellerEmail}</a> for collection
                   <ItemVariantOptions
                     options={JSON.parse(item.variantOptions || '[]')}
                   />
@@ -60,7 +61,8 @@ Items.propTypes = {
       total: PropTypes.shape({
         text: PropTypes.string.isRequired
       }).isRequired,
-      variantOptions: PropTypes.string
+      variantOptions: PropTypes.string,
+      sellerEmail: PropTypes.string
     })
   ).isRequired,
   displayCheckoutPriceIncludeTax: PropTypes.bool.isRequired

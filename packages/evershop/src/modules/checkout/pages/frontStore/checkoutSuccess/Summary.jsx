@@ -118,6 +118,7 @@ export const query = `
         productSku
         qty
         variantOptions
+        sellerEmail
         total {
           value
           text
