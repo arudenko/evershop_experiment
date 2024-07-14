@@ -5,48 +5,72 @@ import './Items.scss';
 import ProductNoThumbnail from '@components/common/ProductNoThumbnail';
 
 function Items({ items, displayCheckoutPriceIncludeTax }) {
-  return (
-    <div id="summary-items">
-      <table className="listing items-table">
+
+  function renderItems(localItems) {
+    return localItems.map((item, index) => (
+      <tr key={index}>
+        <td>
+          <div className="product-thumbnail">
+            <div className="thumbnail">
+              {item.thumbnail && (
+                <img src={item.thumbnail} alt={item.productName} />
+              )}
+              {!item.thumbnail && (
+                <ProductNoThumbnail width={45} height={45} />
+              )}
+            </div>
+            <span className="qty">{item.qty}</span>
+          </div>
+        </td>
+        <td>
+          <div className="product-column">
+            <div>
+              <span className="font-semibold">{item.productName} </span>
+            </div>
+
+            <ItemVariantOptions
+              options={JSON.parse(item.variantOptions || '[]')}
+            />
+          </div>
+        </td>
+        <td>
+          <span>
+            {displayCheckoutPriceIncludeTax
+              ? item.total.text
+              : item.subTotal.text}
+          </span>
+        </td>
+      </tr>)
+    );
+  }
+
+  const groupByEmail = (products) => products.reduce((acc, product) => {
+    const { sellerEmail } = product;
+    const lowercaseSellerEmail = sellerEmail.toLowerCase();
+    if (!acc[lowercaseSellerEmail]) {
+      acc[lowercaseSellerEmail] = [];
+    }
+    acc[lowercaseSellerEmail].push(product);
+    return acc;
+  }, {});
+
+  const groupedItems = groupByEmail(items);
+
+  const renderedGroupedItems = Object.keys(groupedItems).map((email, index) =>
+    (
+      <div>
+        <h3>Please contact <u><a href={`mailto:${groupedItems[email][0].sellerEmail}`}>{groupedItems[email][0].sellerEmail}</a></u> for collection: </h3>
+      <table className="listing items-table" key={index}>
         <tbody>
-          {items.map((item, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <tr key={index}>
-              <td>
-                <div className="product-thumbnail">
-                  <div className="thumbnail">
-                    {item.thumbnail && (
-                      <img src={item.thumbnail} alt={item.productName} />
-                    )}
-                    {!item.thumbnail && (
-                      <ProductNoThumbnail width={45} height={45} />
-                    )}
-                  </div>
-                  <span className="qty">{item.qty}</span>
-                </div>
-              </td>
-              <td>
-                <div className="product-column">
-                  <div>
-                    <span className="font-semibold">{item.productName} </span>
-                  </div>
-                  Please contact <a href= {`mailto:${  item.sellerEmail}`}>{item.sellerEmail}</a> for collection
-                  <ItemVariantOptions
-                    options={JSON.parse(item.variantOptions || '[]')}
-                  />
-                </div>
-              </td>
-              <td>
-                <span>
-                  {displayCheckoutPriceIncludeTax
-                    ? item.total.text
-                    : item.subTotal.text}
-                </span>
-              </td>
-            </tr>
-          ))}
+        {renderItems(groupedItems[email])}
         </tbody>
       </table>
+      </div>
+    ));
+
+  return (
+    <div id="summary-items">
+    { renderedGroupedItems }
     </div>
   );
 }

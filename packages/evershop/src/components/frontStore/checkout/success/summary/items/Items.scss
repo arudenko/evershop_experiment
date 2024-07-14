@@ -4,7 +4,7 @@
   height: 6rem;
   display: flex;
   justify-content: center;
-  border: 1px solid var(--divider);
+  border: 1px solid;
   border-radius: 3px;
   .thumbnail {
     align-self: center;
@@ -26,6 +26,9 @@
 table.items-table {
   td {
     padding: 1.5rem 1rem;
+    border: #00a0ac 1px solid;
+    border-left: #00a0ac 2px solid;
+    border-right: #00a0ac 2px solid;
     &:first-child {
       padding-left: 0px;
       width: 5rem;
@@ -41,12 +44,12 @@ table.items-table {
   tr {
     &:first-child {
       td {
-        border-top: none;
+        //border-top: none;
       }
     }
     &:last-child {
       td {
-        border-bottom: none;
+        //border-bottom: none;
       }
     }
   }
